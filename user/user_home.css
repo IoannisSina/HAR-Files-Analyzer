@@ -1,0 +1,18 @@
+body {
+    background-color: black;
+}
+
+div {
+    background-color: black;
+    position: absolute;
+    height: 50%;
+    /* left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%); */
+    border: 2px solid white;
+    padding: 30px;
+}
+
+label {
+    color: white;
+}

@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: white;
+}
+
+.labels {
+    color: cyan;
+    padding-top: 5px;
+}
+
+.blinking {
+    animation: blinkingText 0.7s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        color: red;
+    }
+    49% {
+        color: green;
+    }
+    60% {
+        color: cyan;
+    }
+    99% {
+        color: purple;
+    }
+    100% {
+        color: rgb(235, 13, 224);
+    }
+}
+
+.register {
+    /* width: 400px;
+    background-color: black;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 50px auto; */
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid white;
+    padding: 10px;
+}
+
+.register h1 {
+    text-align: center;
+    color: #5b6574;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+
+.form-group {
+    color: black;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    border: none;
+}
+
+p {
+    text-align: center;
+    color: cyan
+}
+
+
+/* label{
+    float: left;
+} */
+
+form {
+    width: 90%;
+}
+
+label {
+    text-align: left;
+    width: 150px;
+    display: block;
+    float: left;
+    clear: right;
+    font-size: 18;
+}
+
+.register form input[type="submit"] {
+    background-color: grey;
+    width: 45%;
+    margin-left: 30%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+}

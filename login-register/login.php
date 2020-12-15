@@ -35,22 +35,27 @@ if($stmt->num_rows > 0){
         // check if person is user or admin and act properly
         if($prop == 'user'){
             header('location: ../user/user_home.php');
-            exit;
+            exit();
         }else{
             header("location: ../admin/admin_home.html"); 
             //echo 'Welcome Admin, ' . $_SESSION['name'] . '!';
-            exit;
+            exit();
         }
 
     }else {
-        echo 'Incorrect password!';
+        //STAY AT THE SAME PAGE
+        //session_start();
+        $_SESSION["message"] = "Incorrect Password";
+        header("location: index.php");
+        //echo "Incorrect password!";
+        exit();
         //javascript
-        include 'index.html';
     }
 
 }else{
-    include 'index.html';
-    echo '<p> Incorrect Username </p>';
+    $_SESSION["message"] = "Incorrect username";
+    header("location: index.php");
+    // echo '<p> Incorrect Username </p>';
 }
 $stmt->close();
 mysqli_close($con);

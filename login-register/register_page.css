@@ -10,8 +10,13 @@ body {
     background-color: white;
 }
 
+.labels {
+    color: cyan;
+    padding-top: 5px;
+}
+
 .blinking {
-    animation: blinkingText 1s infinite;
+    animation: blinkingText 0.7s infinite;
 }
 
 @keyframes blinkingText {
@@ -32,27 +37,26 @@ body {
     }
 }
 
-.login {
+.register {
+    /* width: 400px;
+    background-color: black;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 50px auto; */
     background-color: black;
     position: absolute;
     left: 50%;
-    top: 40%;
+    top: 50%;
     transform: translate(-50%, -50%);
     border: 2px solid white;
-    padding: 30px;
+    padding: 10px;
 }
 
-.login h1 {
+.register h1 {
     text-align: center;
-    margin-bottom: 20px;
+    color: #5b6574;
     font-size: 24px;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #dee0e4;
-}
-
-#message {
-    color: red;
-    text-align: center;
 }
 
 .form-group {
@@ -61,33 +65,38 @@ body {
     display: flex;
     flex-wrap: wrap;
     margin-left: 10px;
-    border-radius: 5px;
     border: none;
 }
+
+p {
+    text-align: center;
+    color: cyan
+}
+
+
+/* label{
+    float: left;
+} */
 
 form {
     width: 90%;
 }
 
-#reg_form {
-    margin-top: -20px;
-    width: 90%;
+label {
+    text-align: left;
+    width: 150px;
+    display: block;
+    float: left;
+    clear: right;
+    font-size: 18;
 }
 
-.buttons {
+.register form input[type="submit"] {
     background-color: grey;
-    width: 50%;
-    margin-left: 25%;
+    width: 45%;
+    margin-left: 30%;
     margin-top: 20px;
     margin-bottom: 10px;
     border-radius: 8px;
     border: none;
-}
-
-label {
-    color: white;
-}
-
-#show_pass_label {
-    margin-left: 50px;
 }

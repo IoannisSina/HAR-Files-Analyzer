@@ -1,7 +1,6 @@
 <?php
 session_start();
 $session_name =(isset($_SESSION['username']))?$_SESSION['username']:'';
-echo '<h1 style="color: white;"> Welcome User, ' . $_SESSION['username'] . '!</h1>';
 ?>
 
 <!DOCTYE html>
@@ -18,12 +17,18 @@ echo '<h1 style="color: white;"> Welcome User, ' . $_SESSION['username'] . '!</h
 </head>
 
     <div>
-        <label>HAR document to upload:</label>
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <button id="submit" type="button">Submit</button>
-        <!-- <form action="upload.php" method="post" enctype="multipart/form-data">>
-            <input type="submit" value="Upload HAR" name="submit">
-        </form> -->
+        <h1 id="welcome_message"></h1>
+        <div class ="inner_div">
+            <label>HAR document to upload:</label>
+            <input class="buttons" id="har_selector" type="file" name="fileToUpload" id="fileToUpload" accept=".har">
+            <p id="selected_file_name"></p>
+            <button class="buttons" id="submit" type="button">Submit</button><br>
+            <label>Save:</label><br>
+            <input type="radio" name="save_file" checked>
+            <label for="local">Local</label><br>
+            <input type="radio" name="save_file" value="database">
+            <label for="database">Database</label><br>
+        </div>
     </div>
 </body>
 

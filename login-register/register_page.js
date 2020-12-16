@@ -1,10 +1,11 @@
 var reg_pass = document.getElementById('pass');
 var conf_pass = document.getElementById('confpass');
-var mess = document.getElementById('message');
+var message_field = document.getElementById('message');
 var is_pass_ok = false; 
 
-if (session_message != "") mess.innerHTML = session_message;
+if (session_message != "") message_field.innerHTML = session_message;
 
+//runs everytime user changes register_password field
 reg_pass.onkeyup = function() {
     var upperCaseLetters = /[A-Z]/g; //at_least_one_UPPERCASE
     var numbers = /[0-9]/g; //at_least_one_NUMBER
@@ -16,6 +17,7 @@ reg_pass.onkeyup = function() {
     } else is_pass_ok = false;
 }
 
+//runs everytime user changes register_password_confirmation field
 conf_pass.onkeyup = function() {
     conf_pass.style.backgroundColor = 'red';
     if (reg_pass.value == conf_pass.value) conf_pass.style.backgroundColor = "green";
@@ -28,8 +30,8 @@ function check_passwords(register_form) {
         return true;
     }
     else{
-        if(!is_pass_ok) mess.innerHTML = "Password must conatin at least 8 characters, one Capital, one number and one special character";
-        else mess.innerHTML = "Confirmation password must be the same as the Password";
+        if(!is_pass_ok) message_field.innerHTML = "Password must conatin at least 8 characters, one Capital, one number and one special character";
+        else message_field.innerHTML = "Confirmation password must be the same as the Password";
         return false;
     }
 }

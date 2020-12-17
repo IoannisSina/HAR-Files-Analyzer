@@ -14,10 +14,10 @@ else $session_mess = "";
     <meta charset="utf-8">
     <title>Register</title>
     <link rel="stylesheet" href="register_page.css">
-    <script src="register_page.js" defer></script>
     <script type="text/javascript">
     var session_message = '<?php echo $session_mess;?>';
     </script>
+    <script type="text/javascript" src="register_page.js" defer></script>
 </head>
 
 <body>

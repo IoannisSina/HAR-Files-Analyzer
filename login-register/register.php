@@ -64,7 +64,7 @@ if($stmt->num_rows > 0){
     }
   }
   else{
-    $_SESSION["message"] = 'Password must conatin at least 8 characters, one Capital, one number and one special character';
+    $_SESSION["message"] = 'Password must conatin at least 8 characters <br> one Capital, one number and one special character';
     header("Location: register_page.php");
     exit();
   }

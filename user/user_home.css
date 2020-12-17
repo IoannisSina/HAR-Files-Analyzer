@@ -1,27 +1,71 @@
 body {
-    background-color: black;
+    background-color: rgba(53, 54, 54, 0.781);
 }
 
-div {
-    width: 90%;
+.outer_div {
+    align-items: center;
+    width: 40%;
     background-color: black;
     position: absolute;
     height: 30%;
     /* left: 50%;
     top: 40%;
     transform: translate(-50%, -50%); */
-    border: 2px solid white;
-    padding: 30px;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.blinking {
+    animation: blinkingText 1s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        color: red;
+    }
+    49% {
+        color: green;
+    }
+    60% {
+        color: cyan;
+    }
+    99% {
+        color: purple;
+    }
+    100% {
+        color: rgb(235, 13, 224);
+    }
 }
 
 .inner_div {
+    align-items: center;
     width: 50%;
-    padding: 50px;
+    background-color: black;
+    position: absolute;
+    height: 40%;
+    /* left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%); */
+    border: 1px solid white;
+    padding: 30px;
+
 }
 
 .buttons {
-    width: 10%;
+    width: 20%;
+    margin-left: 85%;
+    margin-top: 5%;
+    border-radius: 5px;
 }
+
+#save{
+    color: black;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
 
 label {
     color: white;
@@ -30,6 +74,20 @@ label {
 #welcome_message {
     color: white;
 }
+
+#har_selector{
+    border-radius: 5px;
+    width: 22%;
+    color: white;
+}
+
+#upload_message{
+    margin-top: auto;
+    text-align: left;
+    color: white;
+}
+
+
 
 #selected_file_name {
     color: white;

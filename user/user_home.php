@@ -15,19 +15,23 @@ $session_name =(isset($_SESSION['username']))?$_SESSION['username']:'';
     </script>
     <script src="user_home.js" defer></script>
 </head>
-
-    <div>
-        <h1 id="welcome_message"></h1>
+    
+    <div class="outer_div">
+        <h1 class="blinking" id="welcome_message"></h1>
         <div class ="inner_div">
-            <label>HAR document to upload:</label>
-            <input class="buttons" id="har_selector" type="file" name="fileToUpload" id="fileToUpload" accept=".har">
-            <p id="selected_file_name"></p>
-            <button class="buttons" id="submit" type="button">Submit</button><br>
-            <label>Save:</label><br>
-            <input type="radio" name="save_file" checked>
-            <label for="local">Local</label><br>
-            <input type="radio" name="save_file" value="database">
-            <label for="database">Database</label><br>
+            <h2 id="upload_message">UPLOAD HAR FILE</h2>
+            <input id="har_selector" type="file" name="fileToUpload" accept=".har">
+            <p id="selected_file_name"></p><br>
+            
+            <div id="save">
+                <label id="save_label">Save:</label>
+                <input type="radio" name="save_file" checked>
+                <label for="local">Local</label>
+                <input type="radio" name="save_file" value="database">
+                <label for="database">Database</label>
+            </div>
+            
+            <button class="buttons" id="submit" type="button">Submit</button>
         </div>
     </div>
 </body>

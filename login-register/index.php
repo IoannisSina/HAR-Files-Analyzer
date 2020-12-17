@@ -17,7 +17,7 @@ else $session_mess = "";
     <script type="text/javascript">
     var session_message = '<?php echo $session_mess;?>';
     </script>
-    <script src="login.js" defer></script>
+    <script type="text/javascript" src="login.js" defer></script>
 </head>
 
 <body>

@@ -25,7 +25,7 @@ $session_name =(isset($_SESSION['username']))?$_SESSION['username']:'';
             
             <div id="save">
                 <label id="save_label">Save:</label>
-                <input type="radio" name="save_file" checked>
+                <input id="local_save" type="radio" name="save_file" checked>
                 <label for="local">Local</label>
                 <input type="radio" name="save_file" value="database">
                 <label for="database">Database</label>

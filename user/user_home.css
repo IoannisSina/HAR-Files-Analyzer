@@ -48,7 +48,7 @@ body {
     transform: translate(-50%, -50%); */
     border: 1px solid white;
     padding: 30px;
-
+    padding-bottom: 40px;
 }
 
 .buttons {
@@ -58,14 +58,13 @@ body {
     border-radius: 5px;
 }
 
-#save{
+#save {
     color: black;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
 }
-
 
 label {
     color: white;
@@ -75,19 +74,17 @@ label {
     color: white;
 }
 
-#har_selector{
+#har_selector {
     border-radius: 5px;
     width: 22%;
     color: white;
 }
 
-#upload_message{
+#upload_message {
     margin-top: auto;
     text-align: left;
     color: white;
 }
-
-
 
 #selected_file_name {
     color: white;

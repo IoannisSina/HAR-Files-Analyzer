@@ -10,7 +10,7 @@ $password = trim($_POST["password"]);
 
 try{
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-    $query = "SELECT username, password, property FROM user WHERE username = ?";
+    $query = "SELECT password, property, email FROM user WHERE username = ?";
     $stmt = $con -> prepare($query);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -22,7 +22,7 @@ try{
 
 // if user exists
 if($stmt->num_rows > 0){
-    $stmt->bind_result($user, $pass, $prop);
+    $stmt->bind_result($pass, $prop, $email);
     $stmt->fetch();
     
     // Checking the hashed password
@@ -30,7 +30,8 @@ if($stmt->num_rows > 0){
         
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
-        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
         
         // check if person is user or admin and act properly
         if($prop == 'user'){

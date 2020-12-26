@@ -150,7 +150,12 @@ function servers_ips(cleaned_entries) {
     // console.log("Seen ips length:" + seen_ips.length);
     // let dict_length = Object.keys(dict_response).length;
     // console.log(dict_length);
-    cleaned_entries.map(element => element['coords'] = dict_response[clean_ip(element['serverIPAddress'])]);
+    cleaned_entries.map(element => {
+        if (element['serverIPAddress'] == "")
+            element['coords'] = ["NULL", "NULL"];
+        else
+            element['coords'] = dict_response[clean_ip(element['serverIPAddress'])];
+    });
     return cleaned_entries;
 };
 
@@ -182,11 +187,12 @@ submit_btn.onclick = function() {
                         let user_info = user_ip();
                         //set serves_info with info from request
                         let servers_info = servers_ips(cleaned_obj);
-                        console.log(servers_info[0]);
                         //merge info to send
                         let to_send = [];
                         to_send.push(user_info);
                         to_send.push(servers_info);
+                        to_send.push(session_email);
+                        console.log(servers_info);
 
                         xml_to_send.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {

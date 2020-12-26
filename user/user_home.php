@@ -1,6 +1,7 @@
 <?php
 session_start();
 $session_name =(isset($_SESSION['username']))?$_SESSION['username']:'';
+$session_email =(isset($_SESSION['email']))?$_SESSION['email']:'';
 ?>
 
 <!DOCTYE html>
@@ -12,6 +13,7 @@ $session_name =(isset($_SESSION['username']))?$_SESSION['username']:'';
     <link rel="stylesheet" href="user_home.css">
     <script type="text/javascript">
     var session_username = '<?php echo $session_name;?>';
+    var session_email = '<?php echo $session_email;?>';
     </script>
     <script src="user_home.js" defer></script>
 </head>

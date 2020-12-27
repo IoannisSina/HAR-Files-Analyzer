@@ -15,7 +15,7 @@ else $session_mess = "";
     <title>Login</title>
     <link rel="stylesheet" href="./login.css">
     <script type="text/javascript">
-    var session_message = '<?php echo $session_mess;?>';
+        var session_message = '<?php echo $session_mess;?>';
     </script>
     <script type="text/javascript" src="login.js" defer></script>
 </head>

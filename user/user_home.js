@@ -5,6 +5,7 @@ var selected_file = null;
 
 
 welcome_message.innerHTML = "Welcome " + session_username;
+if (session_message != "") alert(session_message);
 
 function check_extension(f_name) {
     let arr = f_name.split(".");
@@ -201,7 +202,7 @@ submit_btn.onclick = function() {
                             }
                         };
 
-                        xml_to_send.open("POST", "http://localhost/project_web/user/user.php");
+                        xml_to_send.open("POST", "http://localhost/project_web/user/user_insert_entries.php");
                         xml_to_send.setRequestHeader("Content-type", "application/json");
                         xml_to_send.send(JSON.stringify(to_send));
 

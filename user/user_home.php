@@ -2,6 +2,10 @@
 session_start();
 $session_name =(isset($_SESSION['username']))?$_SESSION['username']:'';
 $session_email =(isset($_SESSION['email']))?$_SESSION['email']:'';
+if(isset($_SESSION['message'])){
+    $session_message = $_SESSION['message'];
+    unset($_SESSION['message']);
+} else $session_message = "";
 ?>
 
 <!DOCTYE html>
@@ -9,15 +13,16 @@ $session_email =(isset($_SESSION['email']))?$_SESSION['email']:'';
 <html>
 <head>
     <meta charset="utf-8">
-    <title>user_home</title>
+    <title>user_insert_entries</title>
     <link rel="stylesheet" href="user_home.css">
     <script type="text/javascript">
-    var session_username = '<?php echo $session_name;?>';
-    var session_email = '<?php echo $session_email;?>';
+        var session_username = '<?php echo $session_name;?>';
+        var session_email = '<?php echo $session_email;?>';
+        var session_message = '<?php echo $session_message;?>';
     </script>
     <script src="user_home.js" defer></script>
 </head>
-    
+<body>
     <div class="outer_div">
         <h1 class="blinking" id="welcome_message"></h1>
         <div class ="inner_div">
@@ -35,6 +40,17 @@ $session_email =(isset($_SESSION['email']))?$_SESSION['email']:'';
             
             <button class="buttons" id="submit" type="button">Submit</button>
         </div>
+        <div class="inner_div" id="second_inner_div">
+            <h2 id="upload_message">STATISTICS</h2>
+            <label>Entries inserted:</label><br><br><br>
+            <label>Last insertion:</label>
+        </div>
+        <div class="inner_div" id="third_inner_div">
+            <form name="reset_password" action="user_reset_credentials.php">
+                <input type="submit" value="Change Password/Username">
+            </form>
+        </div>
+      
     </div>
 </body>
 

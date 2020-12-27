@@ -71,9 +71,6 @@ if($stmt->num_rows > 0){
 
 }
 
-
-
-
 $stmt->close();
 mysqli_close($con);
 ?>

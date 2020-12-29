@@ -28,7 +28,6 @@ try{
     $select_query = "SELECT MAX(id) FROM entries";
     $result = $con->query($select_query);
     $max_id = (int)$result->fetch_assoc()['MAX(id)'] + 1;
-    // var_dump($max_id);
 
     //foreach entry
     foreach( $data[1] as $entry ) {

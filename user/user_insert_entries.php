@@ -4,6 +4,9 @@ require_once '../login-register/connection.php';
 $files_get = file_get_contents("php://input");
 $data = json_decode($files_get, true);
 
+
+session_start();
+
 try{
   
     //DATA TO BULK INSERT FOR TABLE ENTRIES
@@ -25,7 +28,7 @@ try{
     $select_query = "SELECT MAX(id) FROM entries";
     $result = $con->query($select_query);
     $max_id = (int)$result->fetch_assoc()['MAX(id)'] + 1;
-    var_dump($max_id);
+    // var_dump($max_id);
 
     //foreach entry
     foreach( $data[1] as $entry ) {
@@ -71,10 +74,35 @@ try{
     $temp_query_headers = "INSERT INTO headers VALUES ";
     $final_query_headers = $temp_query_headers.implode(', ', $headers_arr);
     $rv = $con-> query($final_query_headers);
-    var_dump($final_query_headers);
+    // var_dump($final_query_headers);
     if(!$rv) throw new Exception();
-    
+
+    //get last insertion_date
+    $update_query = "UPDATE user SET last_insertion = CURRENT_TIMESTAMP";
+    $rv = $con-> query($update_query);
+    //var_dump($final_query_entries);
+    if(!$rv) throw new Exception();
+
     //END OF DATA TO INSERT
+    $counter_query = "SELECT COUNT(*), last_insertion FROM user INNER JOIN entries ON user.email = entries.user_email where email = ?";
+    $stmt = $con -> prepare($counter_query);
+    $stmt->bind_param("s", $_SESSION['email']);
+    $rv = $stmt->execute();
+    $stmt->store_result();
+    //var_dump($final_query_entries);
+    if(!$rv) throw new Exception();
+
+    if($stmt->num_rows > 0){
+            
+      $stmt->bind_result($entries_inserted, $last_insertion_date);
+      $stmt->fetch();
+    }
+    $arr = array($entries_inserted, $last_insertion_date);
+    //$_SESSION['entries_inserted'] = $entries_inserted;
+    //$_SESSION['last_insertion_date'] = $last_insertion_date;
+    // header('location: user_home.php');
+    // exit();
+    echo json_encode($arr);
   }
   catch( Exception $e) {
     var_dump("Failed to insert!");

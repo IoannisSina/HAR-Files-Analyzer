@@ -6,6 +6,11 @@ var selected_file = null;
 
 welcome_message.innerHTML = "Welcome " + session_username;
 if (session_message != "") alert(session_message);
+if (session_entries_inserted != "") document.getElementById("entries_inserted").innerHTML = "Entries inserted: " + session_entries_inserted;
+if (session_last_insertion_date == "") document.getElementById("last_insertion").innerHTML = "Last insertion: There are no insertions";
+else document.getElementById("last_insertion").innerHTML = "Last insertion: " + session_last_insertion_date;
+
+
 
 function check_extension(f_name) {
     let arr = f_name.split(".");
@@ -197,12 +202,13 @@ submit_btn.onclick = function() {
 
                         xml_to_send.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
-                                // Result array
-                                console.log("Status: " + this.responseText);
+                                let response = JSON.parse(this.responseText);
+                                document.getElementById("entries_inserted").innerHTML = "Entries inserted: " + response[0];
+                                document.getElementById("last_insertion").innerHTML = "Last insertion: " + response[1];
                             }
                         };
 
-                        xml_to_send.open("POST", "http://localhost/project_web/user/user_insert_entries.php");
+                        xml_to_send.open("POST", "http://localhost/project_web/user/user_insert_entries.php", false);
                         xml_to_send.setRequestHeader("Content-type", "application/json");
                         xml_to_send.send(JSON.stringify(to_send));
 

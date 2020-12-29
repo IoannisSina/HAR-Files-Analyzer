@@ -5,15 +5,15 @@ body {
 
 .outer_div {
     align-items: center;
-    width: 70%;
+    width: 95%;
     background-color: black;
     position: absolute;
     height: 30%;
     /* left: 50%;
     top: 20%; */
     /* transform: translate(-50%, -50%); */
-    border: 1px solid white;
-    padding: 10px;
+    /* border: 1px solid white; */
+    /* padding: 2%; */
 }
 
 .blinking {
@@ -57,7 +57,7 @@ body {
 #third_inner_div {
     width: 22%;
     left: 71.5%;
-    border: none;
+    /* border: none; */
 }
 
 .buttons {
@@ -85,7 +85,7 @@ label {
 
 #har_selector {
     border-radius: 5px;
-    width: 22%;
+    width: 15%;
     color: white;
 }
 
@@ -98,4 +98,16 @@ label {
 #selected_file_name {
     color: white;
     display: inline;
+}
+
+#mapid {
+    height: 69%;
+    top: 30%;
+    /* margin-top: 50%; */
+    /* position: absolute;
+    height: auto;
+    top: auto;
+    padding: auto;
+    align-items: center;
+    padding-bottom: auto; */
 }

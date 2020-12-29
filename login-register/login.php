@@ -16,7 +16,7 @@ try{
     $stmt->execute();
     $stmt->store_result();
   }
-  catch(PDOException $e) {
+  catch(Exception $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
 
@@ -28,10 +28,27 @@ if($stmt->num_rows > 0){
     // Checking the hashed password
     if (password_verify($password, $pass)){
         
+        //select count and last insertion date 
+        //GET NUMBER OF ENTRIES
+        $counter_query = "SELECT COUNT(*), last_insertion FROM user INNER JOIN entries ON user.email = entries.user_email where email = ?";
+        $stmt = $con -> prepare($counter_query);
+        $stmt->bind_param("s", $email);
+        $rv = $stmt->execute();
+        $stmt->store_result();
+        //var_dump($final_query_entries);
+        if(!$rv) throw new Exception();
+
+        if($stmt->num_rows > 0){
+                
+          $stmt->bind_result($entries_inserted, $last_insertion_date);
+          $stmt->fetch();
+        }
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
+        $_SESSION['entries_inserted'] = $entries_inserted;
+        $_SESSION['last_insertion_date'] = $last_insertion_date;
         
         // check if person is user or admin and act properly
         if($prop == 'user'){

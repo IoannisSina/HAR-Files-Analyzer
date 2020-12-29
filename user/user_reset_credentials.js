@@ -39,6 +39,7 @@ function check_usernames(user_form) {
     if (user_form['newusername'].value == user_form['confusername'].value) {
         return true;
     }
+    document.getElementById("message1").innerHTML = "Confirm and New Username must be the same!";
     return false;
 }
 

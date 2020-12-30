@@ -102,6 +102,7 @@ try{
     // $_SESSION['entries_inserted'] = $entries_inserted;
     // $_SESSION['last_insertion_date'] = $last_insertion_date;
     //send data back to JS in order to 
+    $_SESSION['message'] = "Successful insertion!";
     echo json_encode($arr);
   }
   catch( Exception $e) {

@@ -2,6 +2,7 @@ const welcome_message = document.getElementById('welcome_message');
 const submit_btn = document.getElementById('submit');
 const file_selector = document.getElementById('har_selector');
 var selected_file = null;
+var dict_response = {};
 
 
 welcome_message.innerHTML = "Welcome " + session_username;
@@ -87,24 +88,83 @@ function update_labels(resp) {
     document.getElementById("last_insertion").innerHTML = "Last insertion: " + resp[1];
 };
 
-function user_ip() {
+function user_ip(cleaned_entries) {
     //get user's IP and info we need
-    let user_info = "";
+    //let user_info = "";
     const xml_user_info = new XMLHttpRequest();
     xml_user_info.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            user_info = JSON.parse(this.responseText);
+            servers_ips(JSON.parse(this.responseText), cleaned_entries);
         }
     }
-    xml_user_info.open("GET", "http://ip-api.com/json/?fields=status,lat,lon,city,country,isp", false);
+    xml_user_info.open("GET", "http://ip-api.com/json/?fields=status,lat,lon,city,country,isp", true);
     xml_user_info.send(null);
 
-    return user_info;
+    //return user_info;
 };
 
-function servers_ips(cleaned_entries) {
+function send_to_db(cleaned_entries, user_resp) {
+    let to_send = [];
+    to_send.push(user_resp);
+    to_send.push(cleaned_entries);
+    to_send.push(session_email);
+
+    const xml_to_send = new XMLHttpRequest();
+    xml_to_send.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            update_labels(JSON.parse(this.responseText));
+        }
+    };
+
+    xml_to_send.open("POST", "http://localhost/project_web/user/user_insert_entries.php", true);
+    xml_to_send.setRequestHeader("Content-type", "application/json");
+    xml_to_send.send(JSON.stringify(to_send));
+
+};
+
+function push_lat_lng(resp, cleaned_entries, user_resp) {
+
+    for (let i = 0; i < resp.length; i++) {
+        let temp = [];
+        temp.push(resp[i]['lat']);
+        temp.push(resp[i]['lon']);
+        //dict_response[seen_ips[i]] = temp;
+        dict_response[clean_ip(resp[i]['query'])] = temp;
+    }
+
+    if (resp.length < 100) {
+        cleaned_entries.map(element => {
+            if (element['serverIPAddress'] == "")
+                element['coords'] = ["NULL", "NULL"];
+            else
+                element['coords'] = dict_response[clean_ip(element['serverIPAddress'])];
+
+        });
+        send_to_db(cleaned_entries, user_resp);
+    }
+
+};
+
+function send_batch(split, cleaned_entries, user_resp) {
 
     const xml_servers_info = new XMLHttpRequest();
+    xml_servers_info.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Result array
+            push_lat_lng(JSON.parse(this.responseText), cleaned_entries, user_resp);
+            //for every entry of the batch push lat lon
+        }
+    };
+    let endpoint = "http://ip-api.com/batch?fields=query,lat,lon";
+    xml_servers_info.open('POST', endpoint, true);
+    let data = JSON.stringify(split);
+    xml_servers_info.send(data);
+};
+
+
+function servers_ips(user_resp, cleaned_entries) {
+
+
     let seen_ips = [];
     //Get unique ip of all servers in the HAR file
     cleaned_entries.map(function(element) {
@@ -117,23 +177,6 @@ function servers_ips(cleaned_entries) {
         if (!seen_ips.includes(cleaned_ip) && cleaned_ip != "") seen_ips.push(cleaned_ip);
     });
 
-    let dict_response = {};
-    //prepare ips for request to API one request for 100 Ips
-    let endpoint = "http://ip-api.com/batch?fields=query,lat,lon";
-    xml_servers_info.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // Result array
-            let response = JSON.parse(this.responseText);
-            //for every entry of the batch push lat lon
-            for (let i = 0; i < response.length; i++) {
-                let temp = [];
-                temp.push(response[i]['lat']);
-                temp.push(response[i]['lon']);
-                //dict_response[seen_ips[i]] = temp;
-                dict_response[clean_ip(response[i]['query'])] = temp;
-            }
-        }
-    };
 
     //check if length < 100
     if (seen_ips.length > 100) {
@@ -142,31 +185,16 @@ function servers_ips(cleaned_entries) {
         while (i < seen_ips.length) {
             split.push(seen_ips[i]);
             if (split.length == 100 || i == seen_ips.length - 1) {
-                xml_servers_info.open('POST', endpoint, false);
-                let data = JSON.stringify(split);
-                xml_servers_info.send(data);
+                send_batch(split, cleaned_entries, user_resp);
                 split = [];
             }
             i++;
         }
 
     } else {
-        xml_servers_info.open('POST', endpoint, false);
-        let data = JSON.stringify(seen_ips);
-        xml_servers_info.send(data);
+        send_batch(seen_ips, cleaned_entries, user_resp);
     }
-    //put coords in cleaned entries
-    // console.log("Entries length:" + cleaned_entries.length);
-    // console.log("Seen ips length:" + seen_ips.length);
-    // let dict_length = Object.keys(dict_response).length;
-    // console.log(dict_length);
-    cleaned_entries.map(element => {
-        if (element['serverIPAddress'] == "")
-            element['coords'] = ["NULL", "NULL"];
-        else
-            element['coords'] = dict_response[clean_ip(element['serverIPAddress'])];
-    });
-    return cleaned_entries;
+
 };
 
 
@@ -192,27 +220,10 @@ submit_btn.onclick = function() {
                         alert("Your file was cleaned and downloaded successfully");
                         //if user selects to save in database
                     } else {
-                        const xml_to_send = new XMLHttpRequest();
+                        //const xml_to_send = new XMLHttpRequest();
                         //set users_info with info from request
-                        let user_info = user_ip();
-                        //set serves_info with info from request
-                        let servers_info = servers_ips(cleaned_obj);
-                        //merge info to send
-                        let to_send = [];
-                        to_send.push(user_info);
-                        to_send.push(servers_info);
-                        to_send.push(session_email);
+                        user_ip(cleaned_obj);
                         //console.log(servers_info);
-
-                        xml_to_send.onreadystatechange = function() {
-                            if (this.readyState == 4 && this.status == 200) {
-                                update_labels(JSON.parse(this.responseText));
-                            }
-                        };
-
-                        xml_to_send.open("POST", "http://localhost/project_web/user/user_insert_entries.php", true);
-                        xml_to_send.setRequestHeader("Content-type", "application/json");
-                        xml_to_send.send(JSON.stringify(to_send));
 
                     }
                 } catch (error) {

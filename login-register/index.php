@@ -13,7 +13,7 @@ else $session_mess = "";
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="login.css">
     <script type="text/javascript">
         var session_message = '<?php echo $session_mess;?>';
     </script>

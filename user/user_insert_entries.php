@@ -1,11 +1,13 @@
 <?php 
 
+session_start();
+include '../check.php';
 require_once '../login-register/connection.php';
 $files_get = file_get_contents("php://input");
 $data = json_decode($files_get, true);
 
 
-session_start();
+
 
 try{
   
@@ -47,7 +49,7 @@ try{
       //For every entry insert its request headers
       foreach( $entry['request']['headers'] as $req_header){
         $req_header_name = '"'.$req_header['name'].'"';
-        $req_header_value = '"'.$req_header['value'].'"';
+        $req_header_value = "'".$req_header['value']."'";
         $req_header_temp = array($max_id, $header_id, $req_header_name, $req_header_value, $req_header_type);
         $headers_arr[] = "(".implode(', ', $req_header_temp).")";
       }
@@ -55,7 +57,7 @@ try{
       //For every entry insert its response headers
       foreach( $entry['response']['headers'] as $res_header){
         $res_header_name = '"'.$res_header['name'].'"';
-        $res_header_value = '"'.$res_header['value'].'"';
+        $res_header_value = "'".$res_header['value']."'";
         $res_header_temp = array($max_id, $header_id, $res_header_name, $res_header_value, $res_header_type);
         $headers_arr[] = "(".implode(', ', $res_header_temp).")";
       }
@@ -73,7 +75,7 @@ try{
     $temp_query_headers = "INSERT INTO headers VALUES ";
     $final_query_headers = $temp_query_headers.implode(', ', $headers_arr);
     $rv = $con-> query($final_query_headers);
-    // var_dump($final_query_headers);
+    //var_dump($final_query_headers);
     if(!$rv) throw new Exception();
 
     //get last insertion_date
@@ -97,14 +99,13 @@ try{
       $stmt->fetch();
     }
     $arr = array($entries_inserted, $last_insertion_date);
-    //$_SESSION['entries_inserted'] = $entries_inserted;
-    //$_SESSION['last_insertion_date'] = $last_insertion_date;
-    // header('location: user_home.php');
-    // exit();
+    // $_SESSION['entries_inserted'] = $entries_inserted;
+    // $_SESSION['last_insertion_date'] = $last_insertion_date;
+    //send data back to JS in order to 
     echo json_encode($arr);
   }
   catch( Exception $e) {
-    var_dump("Failed to insert!");
+    echo "$e";
   }
 
 mysqli_close($con);

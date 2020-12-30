@@ -82,6 +82,10 @@ function clean_ip(ip) {
 
 };
 
+function update_labels(resp) {
+    document.getElementById("entries_inserted").innerHTML = "Entries inserted: " + resp[0];
+    document.getElementById("last_insertion").innerHTML = "Last insertion: " + resp[1];
+};
 
 function user_ip() {
     //get user's IP and info we need
@@ -198,17 +202,15 @@ submit_btn.onclick = function() {
                         to_send.push(user_info);
                         to_send.push(servers_info);
                         to_send.push(session_email);
-                        console.log(servers_info);
+                        //console.log(servers_info);
 
                         xml_to_send.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
-                                let response = JSON.parse(this.responseText);
-                                document.getElementById("entries_inserted").innerHTML = "Entries inserted: " + response[0];
-                                document.getElementById("last_insertion").innerHTML = "Last insertion: " + response[1];
+                                update_labels(JSON.parse(this.responseText));
                             }
                         };
 
-                        xml_to_send.open("POST", "http://localhost/project_web/user/user_insert_entries.php", false);
+                        xml_to_send.open("POST", "http://localhost/project_web/user/user_insert_entries.php", true);
                         xml_to_send.setRequestHeader("Content-type", "application/json");
                         xml_to_send.send(JSON.stringify(to_send));
 

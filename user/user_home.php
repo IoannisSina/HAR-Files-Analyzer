@@ -2,6 +2,8 @@
 
 session_start();
 
+include '../check.php';
+
 $session_name = (isset($_SESSION['username']))?$_SESSION['username']:'';
 $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
 $session_entries_inserted = (isset($_SESSION['entries_inserted']))?$_SESSION['entries_inserted']:'';
@@ -60,8 +62,11 @@ if(isset($_SESSION['message'])){
             <label id="last_insertion"></label>
         </div>
         <div class="inner_div" id="third_inner_div">
-            <form name="reset_password" action="user_reset_credentials.php">
-                <input type="submit" value="Change Password/Username">
+            <form id="change_form" name="reset_password" action="user_reset_credentials.php">
+                <input class="forms" type="submit" value="Change Password/Username">
+            </form>
+            <form name="log_out" action="log_out.php">
+                <input class="forms" type="submit" value="Logout">
             </form>
         </div>
     </div>

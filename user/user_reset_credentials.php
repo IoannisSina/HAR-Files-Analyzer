@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+include '../check.php';
 $session_name =(isset($_SESSION['username']))?$_SESSION['username']:'';
 $session_email =(isset($_SESSION['email']))?$_SESSION['email']:'';
 if(isset($_SESSION['message'])){

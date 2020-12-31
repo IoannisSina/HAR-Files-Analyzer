@@ -37,8 +37,12 @@ try{
 
         }
     }
-    $to_send = array($data_heatmap, $data_info);
-    echo json_encode($to_send);
+    //CHECK IF THERE ARE ENTRIES IN DB
+    if(!(empty($data_heatmap) || empty($data_info))){
+        $to_send = array($data_heatmap, $data_info);
+        echo json_encode($to_send);
+    }
+    
 
 }catch( Exception $e) {
     echo "Failed to select!";

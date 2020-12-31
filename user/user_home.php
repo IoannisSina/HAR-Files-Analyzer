@@ -32,11 +32,11 @@ if(isset($_SESSION['message'])){
         var session_entries_inserted = '<?php echo $session_entries_inserted;?>';
         var session_last_insertion_date = '<?php echo $session_last_insertion_date;?>';
     </script>
+    <script src="user_heatmap.js" defer></script>
     <script src="user_home.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/heatmapjs@2.0.2/heatmap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-heatmap@1.0.0/leaflet-heatmap.js"></script>
-    <script src="user_heatmap.js" defer></script>
 </head>
 <body>
     <div class="outer_div">

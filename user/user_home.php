@@ -39,38 +39,41 @@ if(isset($_SESSION['message'])){
     <script src="https://cdn.jsdelivr.net/npm/leaflet-heatmap@1.0.0/leaflet-heatmap.js"></script>
 </head>
 <body>
-    <div class="outer_div">
-        <h1 class="blinking" id="welcome_message"></h1>
-        <div class ="inner_div">
-            <h2 id="upload_message">UPLOAD HAR FILE</h2>
-            <input id="har_selector" type="file" name="fileToUpload" accept=".har">
-            <p id="selected_file_name"></p><br>
-            
-            <div id="save">
-                <label id="save_label">Save:</label>
-                <input id="local_save" type="radio" name="save_file" checked>
-                <label for="local">Local</label>
-                <input type="radio" name="save_file" value="database">
-                <label for="database">Database</label>
+    <div id="page_wrap">
+        <div class="outer_div">
+            <h1 class="blinking" id="welcome_message"></h1>
+            <div class ="inner_div">
+                <h2 id="upload_message">UPLOAD HAR FILE</h2>
+                <input id="har_selector" type="file" name="fileToUpload" accept=".har">
+                <p id="selected_file_name"></p><br>
+                
+                <div id="save">
+                    <label id="save_label">Save:</label>
+                    <input id="local_save" type="radio" name="save_file" checked>
+                    <label for="local">Local</label>
+                    <input type="radio" name="save_file" value="database">
+                    <label for="database">Database</label>
+                </div>
+                
+                <button class="buttons" id="submit" type="button">Submit</button>
             </div>
-            
-            <button class="buttons" id="submit" type="button">Submit</button>
+            <div class="inner_div" id="second_inner_div">
+                <h2 id="upload_message">STATISTICS</h2>
+                <label id="entries_inserted"></label><br><br>
+                <label id="last_insertion"></label>
+            </div>
+            <div class="inner_div" id="third_inner_div">
+                <form id="change_form" name="reset_password" action="user_reset_credentials.php">
+                    <input class="forms" type="submit" value="Change Password/Username">
+                </form>
+                <form name="log_out" action="log_out.php">
+                    <input class="forms" type="submit" value="Logout">
+                </form>
+            </div>
         </div>
-        <div class="inner_div" id="second_inner_div">
-            <h2 id="upload_message">STATISTICS</h2>
-            <label id="entries_inserted"></label><br><br><br>
-            <label id="last_insertion"></label>
-        </div>
-        <div class="inner_div" id="third_inner_div">
-            <form id="change_form" name="reset_password" action="user_reset_credentials.php">
-                <input class="forms" type="submit" value="Change Password/Username">
-            </form>
-            <form name="log_out" action="log_out.php">
-                <input class="forms" type="submit" value="Logout">
-            </form>
-        </div>
+        <div id="no_entries"></div>
+        <div id="mapid"></div>
     </div>
-    <div id="mapid"></div>
     
 </body>
 

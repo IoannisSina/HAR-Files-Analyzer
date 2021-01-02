@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 //print_r ($_POST);
 require_once 'connection.php';
 
@@ -50,17 +49,19 @@ if($stmt->num_rows > 0){
   if ($at_least_one_Uppercase && $at_least_one_number && $at_least_one_special && $pass_length >= 8 && $password == $confirm_password){
     //if there is no other user with same credentials and password is ok insert new user
     try{
-      $query = "INSERT INTO user VALUES (?,?,?,?)";
+      $query = "INSERT INTO user VALUES (?,?,?,?,?)";
       $stmt = $con -> prepare($query);
-      $stmt->bind_param("ssss", $username, $password_hash, $email, $property);
-      $stmt->execute();
+      $nil = null;
+      $stmt->bind_param("sssss", $username, $password_hash, $email, $property, $nil);
+      $rv = $stmt->execute();
+      if(!$rv) throw new Exception();
       //Go back to login page
       $_SESSION["message"] = "Account created!";
       header("location: index.php");
       exit();
     }
-    catch(PDOException $e) {
-      echo $sql . "<br>" . $e->getMessage();
+    catch(Exception $e) {
+      print_r($stmt);
     }
   }
   else{

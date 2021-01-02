@@ -23,10 +23,18 @@ function check_extension(f_name) {
 //When user chooses a file
 file_selector.addEventListener('change', (event) => {
     selected_file = event.target.files;
-    if (check_extension(selected_file[0]['name']))
-        document.getElementById('selected_file_name').innerHTML = selected_file[0]['name'];
-    else
-        alert("Please select a HAR file!");
+
+    try {
+        if (check_extension(selected_file[0]['name'])) {
+            document.getElementById('selected_file_name').innerHTML = selected_file[0]['name'];
+        } else
+            alert("Please select a HAR file!");
+    } catch {
+        file_selector.files = null;
+        selected_file = null;
+        document.getElementById('selected_file_name').innerHTML = "";
+    }
+
 });
 
 //clean request and response headers
@@ -192,7 +200,10 @@ function send_to_db(cleaned_entries, user_resp) {
     const xml_to_send = new XMLHttpRequest();
     xml_to_send.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            update_labels(JSON.parse(this.responseText));
+            try {
+                update_labels(JSON.parse(this.responseText));
+            } catch { alert("SOmething went wrong!"); }
+
         }
     };
 
@@ -206,7 +217,7 @@ function update_labels(resp) {
     alert("Successful insertion!");
     document.getElementById("entries_inserted").innerHTML = "Entries inserted: " + resp[0];
     document.getElementById("last_insertion").innerHTML = "Last insertion: " + resp[1];
-    //send_request(true);
+    send_request();
 };
 
 
@@ -254,3 +265,5 @@ submit_btn.onclick = function() {
         alert("Please select a file!");
     }
 };
+
+//document.addEventListener('touchstart', kappa, { passive: true });

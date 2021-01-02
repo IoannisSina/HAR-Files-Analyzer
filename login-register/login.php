@@ -55,7 +55,7 @@ if($stmt->num_rows > 0){
             header('location: ../user/user_home.php');
             exit();
         }else{
-            header("location: ../admin/admin_home.html"); 
+            header("location: ../admin/admin_home.php"); 
             //echo 'Welcome Admin, ' . $_SESSION['name'] . '!';
             exit();
         }

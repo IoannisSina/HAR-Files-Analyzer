@@ -1,0 +1,46 @@
+.blinking {
+    animation: blinkingText 4s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        color: black;
+    }
+    50% {
+        color: white;
+    }
+    100% {
+        color: black;
+    }
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 95%;
+    min-height: 95%;
+    background-color: black;
+}
+
+.quarter {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.contents {
+    height: 50%;
+    width: 100%;
+}
+
+.box {
+    background-color: black;
+    border: 1px solid white;
+}
+
+#welcome_message {
+    text-align: center;
+    height: 5%;
+    background-color: black;
+}

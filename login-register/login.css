@@ -11,24 +11,18 @@ body {
 }
 
 .blinking {
-    animation: blinkingText 1s infinite;
+    animation: blinkingText 2s infinite;
 }
 
 @keyframes blinkingText {
     0% {
-        color: red;
+        color: black;
     }
-    49% {
-        color: green;
-    }
-    60% {
-        color: cyan;
-    }
-    99% {
-        color: purple;
+    50% {
+        color: white;
     }
     100% {
-        color: rgb(235, 13, 224);
+        color: black;
     }
 }
 

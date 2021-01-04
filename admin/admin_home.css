@@ -35,12 +35,34 @@ body {
 }
 
 .box {
-    background-color: black;
-    border: 1px solid white;
+    background-color: white;
+    border: 0.2px solid red;
 }
 
 #welcome_message {
     text-align: center;
     height: 5%;
     background-color: black;
+}
+
+#box-1 {
+    border-right: 1px solid red;
+    border-bottom: 1px solid red;
+}
+
+#box-2 {
+    border-bottom: 1px solid red;
+}
+
+#box-3 {
+    border-right: 1px solid red;
+}
+
+#selector-1 {
+    margin: 1%;
+}
+
+#selector_1_pie {
+    /* width: 20px;
+    height: 20px; */
 }

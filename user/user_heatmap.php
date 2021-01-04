@@ -47,4 +47,6 @@ try{
 }catch( Exception $e) {
     echo "Failed to select!";
 }
- ?>
+
+mysqli_close($con);
+?>

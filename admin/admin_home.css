@@ -35,8 +35,8 @@ body {
 }
 
 .box {
-    background-color: white;
-    border: 0.2px solid red;
+    background-color: black;
+    /* border: 0.2px solid red; */
 }
 
 #welcome_message {
@@ -47,22 +47,37 @@ body {
 
 #box-1 {
     border-right: 1px solid red;
-    border-bottom: 1px solid red;
 }
 
-#box-2 {
-    border-bottom: 1px solid red;
+#box-4 {
+    border-top: 1px solid red;
 }
 
 #box-3 {
     border-right: 1px solid red;
+    border-top: 1px solid red;
 }
 
 #selector-1 {
     margin: 1%;
 }
 
-#selector_1_pie {
-    /* width: 20px;
-    height: 20px; */
+#selector-2 {
+    /* height: 20%;
+    overflow: auto;
+    white-space: nowrap;
+    background-color: white;
+    color: black; */
+}
+
+#submit {
+    float: left;
+    height: 8%;
+    width: 8%;
+    border-radius: 5px;
+    margin-left: 2%;
+}
+
+#inner_1 {
+    float: left;
 }

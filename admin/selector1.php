@@ -14,6 +14,7 @@ $data = json_decode($files_get, true);
 
 $labels = array();
 $values = array();
+$label = "";
 //CASE FOR 1.A 1.b 1.c 1.d 1.e 1.f// 
 switch ($data) {
 
@@ -30,6 +31,7 @@ switch ($data) {
         }
         $labels[] = "Number of users";
         $values[] = $number_of_users;
+        $label = "Numbers of users";
         break;
 
     case "entriestype":
@@ -52,6 +54,7 @@ switch ($data) {
         catch(Exception $e) {
             echo "Query failed!";
         }
+        $label = "Entries by type";
         
         break;
 
@@ -76,7 +79,7 @@ switch ($data) {
         catch(Exception $e) {
             echo "Query failed!";
         }
-        
+        $label = "Entries by status";
         break;
 
     case "domains":
@@ -93,6 +96,7 @@ switch ($data) {
         }
         $labels[] = "Number of URLs";
         $values[] = $number_of_url;
+        $label = "Number of URLs";
         break;
 
     case "isp":
@@ -110,6 +114,7 @@ switch ($data) {
         }
         $labels[] = "Number of Distinct ISP";
         $values[] = $number_of_isp;
+        $label = "Number of ISP's";
         break;
 
     case "age":
@@ -124,20 +129,20 @@ switch ($data) {
             if($result->num_rows > 0){
         
                 while($row = $result->fetch_assoc()) {
-
+                    
                     $labels[] = $row['content_type'];
-                    $values[] = $row['average'];
+                    $values[] = round ( $row['average'], 2); 
                 }
             }
         }
         catch(Exception $e) {
             echo "Query failed!";
         }
-        
+        $label = "Average age per content-type";
         break;
 
 }
 
-echo json_encode(array($labels, $values));
+echo json_encode(array($labels, $values, $label));
 mysqli_close($con);
 ?>

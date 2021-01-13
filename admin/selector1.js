@@ -81,39 +81,13 @@ function bar_data(response) {
 };
 
 
-// function pie_data(response) {
 
-//     let data = {
-//         labels: response[0],
-//         datasets: [{
-//             fill: false,
-//             backgroundColor: [
-//                 'cyan',
-//                 'red',
-//                 'blue',
-//                 'purple'
-//             ],
-//             data: response[1],
-//             //Notice the borderColor 
-//             // borderColor:	['black', 'black'],
-//             borderWidth: [3, 3],
-//             // hoverBackgroundColor: ["lightskyblue", "yellow"]
-//         }],
-//         options: {
-//             legend: {
-//                 labels: {
-//                     fontColor: "red"
-//                 }
-//             }
-//         }
-//     };
-//     myDoughnutChart.data = data;
-//     myDoughnutChart.update();
-
-// };
 
 selector_1.addEventListener('change', selector1_func);
 selector1_func();
+var myBarChart = new Chart(ctx, {
+    type: 'bar'
+});
 
 // // And for a doughnut chart
 // var myDoughnutChart = new Chart(ctx, {
@@ -146,6 +120,35 @@ selector1_func();
 //         }]
 //     }
 // }
-var myBarChart = new Chart(ctx, {
-    type: 'bar'
-});
+
+
+// function pie_data(response) {
+
+//     let data = {
+//         labels: response[0],
+//         datasets: [{
+//             fill: false,
+//             backgroundColor: [
+//                 'cyan',
+//                 'red',
+//                 'blue',
+//                 'purple'
+//             ],
+//             data: response[1],
+//             //Notice the borderColor 
+//             // borderColor:	['black', 'black'],
+//             borderWidth: [3, 3],
+//             // hoverBackgroundColor: ["lightskyblue", "yellow"]
+//         }],
+//         options: {
+//             legend: {
+//                 labels: {
+//                     fontColor: "red"
+//                 }
+//             }
+//         }
+//     };
+//     myDoughnutChart.data = data;
+//     myDoughnutChart.update();
+
+// };

@@ -121,7 +121,7 @@ switch ($data) {
 
         try{
             // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-            $query_age = "SELECT a.value as content_type, AVG(b.value) as average FROM headers AS a INNER JOIN headers AS b ON a.entry_id = b.entry_id WHERE a.name = 'content-type' and b.name = 'age' GROUP BY content_type";
+            $query_age = "SELECT a.value as content_type, AVG(b.value) as average FROM headers AS a INNER JOIN headers AS b ON a.entry_id = b.entry_id WHERE a.name = 'content-type' and b.name = 'age' GROUP BY content_type ORDER BY LENGTH(content_type)";
             $result = $con->query($query_age);
             if(!$result) throw new Exception();
             $to_return = array();

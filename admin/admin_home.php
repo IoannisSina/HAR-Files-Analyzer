@@ -61,13 +61,13 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
   </div>
   <div class="inner_2" id="days">
     <select title='Days' multiple="multiple" name="selector_days" id="selector_days" class="selectpicker"  data-live-search="true">
-        <option value="monday">Monday</option>
-        <option value="tuesday">Tuesday</option>
-        <option value="wednesday">Wednesday</option>
-        <option value="thursday">Thursday</option>
-        <option value="friday">Friday</option>
-        <option value="saturday">Saturday</option>
-        <option value="sunday">Sunday</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
     </select>
   </div>
   <div class="inner_2" id="httpmethod">
@@ -87,13 +87,15 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
   </div>
   <div class="inner_2" id="filter">
     <button id="submit" type="button">Filter</button>
+    <button id="clear" type="button">Clear all</button>
+    <button id="select_all" type="button">Select all</button>
   </div>
-  <div class="inner_2" id="clear_div">
+  <!-- <div class="inner_2" id="clear_div">
     <button id="clear" type="button">Clear all</button>
   </div>
   <div class="inner_2" id="select_all_div">
     <button id="select_all" type="button">Select all</button>
-  </div>
+  </div> -->
   <canvas id="graph_2" height = 100></canvas>
 </div>
 

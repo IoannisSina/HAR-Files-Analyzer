@@ -51,8 +51,53 @@ sub_btn.onclick = function() {
 };
 
 function line_data(response) {
-    console.log(response);
+
+
+    let data = {
+        labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+        datasets: [{
+            data: response,
+            label: "Average timings",
+            borderColor: "red",
+            fill: false
+        }],
+
+    }
+    let options = {
+        
+
+        scales: {
+            xAxes: [{
+                
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Hour of Day',
+                    
+                }
+            }],
+            yAxes: [{
+                
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Timings',
+                    
+                }
+            }]
+        },
+        title: {
+            display: true,
+            text: 'Timings per Hour',
+        }
+    };
+
+
+
+    myLineChart.data = data;
+    myLineChart.options = options;
+    myLineChart.update();
+
 };
+
 
 function onload_all(response) {
     let isps = response[0];
@@ -71,6 +116,7 @@ function onload_all(response) {
     }
     //refresh all selectpickers
     $('.selectpicker').selectpicker('refresh');
+    sub_btn.click();
 
 };
 
@@ -97,20 +143,6 @@ xml_fill_selectors.open("POST", "http://localhost/project_web/admin/selector2.ph
 xml_fill_selectors.send();
 
 var myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-        datasets: [{
-            data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-            label: "Africa",
-            borderColor: "#3e95cd",
-            fill: false
-        }],
-        options: {
-            title: {
-                display: true,
-                text: 'World population per region (in millions)'
-            }
-        }
-    }
+    type: 'line'
+
 });

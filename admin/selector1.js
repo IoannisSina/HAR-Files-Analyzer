@@ -4,7 +4,6 @@ var ctx = document.getElementById('selector_1_pie').getContext('2d');
 
 welcome_message.innerHTML = "Welcome " + session_username;
 
-
 function selector1_func() {
     const xml_selector_1 = new XMLHttpRequest();
     xml_selector_1.onreadystatechange = function() {
@@ -44,7 +43,6 @@ function bar_data(response) {
         }],
         borderWidth: 2,
 
-
     };
     let options = {
         scales: {
@@ -72,16 +70,11 @@ function bar_data(response) {
         }
     };
 
-
-
     myBarChart.data = data;
     myBarChart.options = options;
     myBarChart.update();
 
 };
-
-
-
 
 selector_1.addEventListener('change', selector1_func);
 selector1_func();

@@ -28,15 +28,15 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
   <script src="selector1.js" defer></script>
+  <script src="selector3.js" defer></script>
   <script src="selector2.js" defer></script>
+  
   <script type="text/javascript">
         var session_username = '<?php echo $session_name;?>';
         var session_email = '<?php echo $session_email;?>';
   </script>
 </head>
 <body>
-
-
 
 <h1 id="welcome_message" class="blinking"></h1>
 <hr style="height:1px;border-width:0;background-color:red">
@@ -56,11 +56,11 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
 
 <div id="box-1">
   <div class="inner_2" id="contenttype">
-    <select title='Content Type' multiple="multiple" name="selector_contenttype" id="selector_contenttype" class="selectpicker"  data-live-search="true">
+    <select title='Content Type' multiple="multiple" name="selector_contenttype" id="selector_contenttype" class="selectpicker selectors_2"  data-live-search="true">
     </select>
   </div>
   <div class="inner_2" id="days">
-    <select title='Days' multiple="multiple" name="selector_days" id="selector_days" class="selectpicker"  data-live-search="true">
+    <select title='Days' multiple="multiple" name="selector_days" id="selector_days" class="selectpicker selectors_2"  data-live-search="true">
         <option value="Monday">Monday</option>
         <option value="Tuesday">Tuesday</option>
         <option value="Wednesday">Wednesday</option>
@@ -71,7 +71,7 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
     </select>
   </div>
   <div class="inner_2" id="httpmethod">
-    <select title='HTTP Method' multiple="multiple" name="selector_httpmethod" id="selector_httpmethod" class="selectpicker"  data-live-search="true">
+    <select title='HTTP Method' multiple="multiple" name="selector_httpmethod" id="selector_httpmethod" class="selectpicker selectors_2"  data-live-search="true">
         <option value="GET">GET</option>
         <option value="POST">POST</option>
         <option value="PUT">PUT</option>
@@ -82,21 +82,43 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
     </select>
   </div>
   <div class="inner_2" id="isp">
-    <select title='ISP' multiple="multiple" name="selector_isp" id="selector_isp" class="selectpicker"  data-live-search="true">
+    <select title='ISP' multiple="multiple" name="selector_isp" id="selector_isp" class="selectpicker selectors_2"  data-live-search="true">
     </select>
   </div>
   <div class="inner_2" id="filter">
-    <button id="submit" type="button">Filter</button>
-    <button id="clear" type="button">Clear all</button>
-    <button id="select_all" type="button">Select all</button>
+    <button class="buttons" id="submit" type="button">Filter</button>
   </div>
-  <!-- <div class="inner_2" id="clear_div">
-    <button id="clear" type="button">Clear all</button>
+  <div class="inner_2" id="clear_div">
+    <button class="buttons" id="clear" type="button">Clear all</button>
   </div>
   <div class="inner_2" id="select_all_div">
-    <button id="select_all" type="button">Select all</button>
-  </div> -->
+    <button class="buttons" id="select_all" type="button">Select all</button>
+  </div>
   <canvas id="graph_2" height = 100></canvas>
+</div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------------->
+<hr style="height:1px;border-width:0;background-color:red">
+<div id="box-1">
+  <div class="inner_2" id="contenttype_3_div">
+    <select title='Content Type' multiple="multiple" name="selector_contenttype_3" id="selector_contenttype_3" class="selectpicker selectors_3"  data-live-search="true">
+    </select>
+  </div>
+  <div class="inner_2" id="isp_3_div">
+    <select title='ISP' multiple="multiple" name="selector_isp_3" id="selector_isp_3" class="selectpicker selectors_3"  data-live-search="true">
+    </select>
+  </div>
+
+  <div class="buttons_div" id="filter_div_3">
+    <button class="buttons" id="submit_3" type="button">Filter</button>
+  </div>
+  <div class="buttons_div" id="clear_div_3">
+    <button class="buttons" id="clear_3" type="button">Clear all</button>
+  </div>
+  <div class="buttons_div" id="select_all_div_3">
+    <button class="buttons" id="select_all_3" type="button">Select all</button>
+  </div>
+
+  <canvas id="graph_3" height = 100></canvas>
 </div>
 
 </body>

@@ -3,9 +3,7 @@ const isp_selector = document.getElementById('selector_isp');
 const sub_btn = document.getElementById('submit');
 const clear_btn = document.getElementById('clear');
 const select_all_btn = document.getElementById('select_all');
-var ctx = document.getElementById('graph_2').getContext('2d');
-
-
+var ctx_2 = document.getElementById('graph_2').getContext('2d');
 
 sub_btn.onclick = function() {
 
@@ -35,8 +33,8 @@ sub_btn.onclick = function() {
         values_isp = $("#selector_isp").val();
     }
 
-    const xml_fill_selectors = new XMLHttpRequest();
-    xml_fill_selectors.onreadystatechange = function() {
+    const xml_line_data = new XMLHttpRequest();
+    xml_line_data.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             try {
                 line_data(JSON.parse(this.responseText));
@@ -46,8 +44,8 @@ sub_btn.onclick = function() {
 
         }
     };
-    xml_fill_selectors.open("POST", "http://localhost/project_web/admin/timings_graph.php", true);
-    xml_fill_selectors.send(JSON.stringify([values_contenttype, values_days, values_httpmethod, values_isp]));
+    xml_line_data.open("POST", "http://localhost/project_web/admin/timings_graph.php", true);
+    xml_line_data.send(JSON.stringify([values_contenttype, values_days, values_httpmethod, values_isp]));
 };
 
 function line_data(response) {
@@ -64,23 +62,23 @@ function line_data(response) {
 
     }
     let options = {
-        
 
         scales: {
+            gridLines: { color: 'red' },
             xAxes: [{
-                
+
                 scaleLabel: {
                     display: true,
                     labelString: 'Hour of Day',
-                    
+
                 }
             }],
             yAxes: [{
-                
+
                 scaleLabel: {
                     display: true,
                     labelString: 'Timings',
-                    
+
                 }
             }]
         },
@@ -98,7 +96,6 @@ function line_data(response) {
 
 };
 
-
 function onload_all(response) {
     let isps = response[0];
     let content_types = response[1];
@@ -107,25 +104,43 @@ function onload_all(response) {
         opt.value = isps[i];
         opt.innerHTML = isps[i];
         isp_selector.add(opt);
+
     }
+    //push also to the selector of 3
+    for (let i = 0; i < isps.length; i++) {
+        let opt = document.createElement('option');
+        opt.value = isps[i];
+        opt.innerHTML = isps[i];
+        document.getElementById('selector_isp_3').add(opt);
+    }
+
     for (let j = 0; j < content_types.length; j++) {
         let opt = document.createElement('option');
         opt.value = content_types[j];
         opt.innerHTML = content_types[j];
         content_selector.add(opt);
     }
+    //push also to the selector of 3
+    for (let j = 0; j < content_types.length; j++) {
+        let opt = document.createElement('option');
+        opt.value = content_types[j];
+        opt.innerHTML = content_types[j];
+        document.getElementById('selector_contenttype_3').add(opt);
+    }
     //refresh all selectpickers
     $('.selectpicker').selectpicker('refresh');
     sub_btn.click();
+    //click_button_3 as well
+    sub_btn_3.click();
 
 };
 
 clear_btn.onclick = function() {
-    $('.selectpicker').selectpicker('deselectAll');
+    $('.selectors_2').selectpicker('deselectAll');
 };
 
 select_all_btn.onclick = function() {
-    $('.selectpicker').selectpicker('selectAll');
+    $('.selectors_2').selectpicker('selectAll');
 };
 
 
@@ -142,7 +157,7 @@ xml_fill_selectors.onreadystatechange = function() {
 xml_fill_selectors.open("POST", "http://localhost/project_web/admin/selector2.php", true);
 xml_fill_selectors.send();
 
-var myLineChart = new Chart(ctx, {
+var myLineChart = new Chart(ctx_2, {
     type: 'line'
 
 });

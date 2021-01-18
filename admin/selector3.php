@@ -51,54 +51,115 @@ $content_type_3 = join("','",$data[0]);
 $isps_3 = join("','",$data[1]);
 $to_return_3 = array();
 $temp = array();
-try{
-    // SQL query for isps and Content types
-    $query_3 = "SELECT entry_id, name, value FROM headers INNER JOIN entries on entry_id = id
-    WHERE (value LIKE '%max-age%' OR name IN ('expires','last-modified')) AND 
-    isp IN ('$isps_3') AND entry_id IN(SELECT entry_id FROM headers WHERE name='content-type' and value IN ('$content_type_3'))";
-    $result = $con->query($query_3);
-    if(!$result) throw new Exception();
-    
 
-    if($result->num_rows > 0){
-        while($row = $result->fetch_assoc()) {
+if($data[2] == 'a'){
 
-            $temp[] = $row;
+    try{
+        // SQL query for isps and Content types
+        $query_3 = "SELECT entry_id, name, value FROM headers INNER JOIN entries on entry_id = id
+        WHERE (value LIKE '%max-age%' OR name IN ('expires','last-modified')) AND 
+        isp IN ('$isps_3') AND entry_id IN(SELECT entry_id FROM headers WHERE name='content-type' and value IN ('$content_type_3'))";
+        $result = $con->query($query_3);
+        if(!$result) throw new Exception();
+        
+
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()) {
+
+                $temp[] = $row;
+            }
         }
+        //----------------------------------------------------------------------
     }
-    //----------------------------------------------------------------------
-}
-catch(Exception $e) {
-    echo "Query failed";
-}
-
-//take headers from same entry to calculate max age!!
-$i = 0;
-while($i < count($temp)) {
-    $current_entry_id = $temp[$i]['entry_id'];
-    $temp_block = array();
-    $j = $i;
-    while($j < count($temp) && $current_entry_id == $temp[$j]['entry_id']){
-
-        $temp_block[] = $temp[$j];
-        $j++;
+    catch(Exception $e) {
+        echo "Query failed";
     }
-    find_max_age($temp_block);
-    $i = $j;
-}
 
-//SORT ARRAY TO CREATE BUCKETS
-sort($to_return_3);
+    //take headers from same entry to calculate max age!!
+    $i = 0;
+    while($i < count($temp)) {
+        $current_entry_id = $temp[$i]['entry_id'];
+        $temp_block = array();
+        $j = $i;
+        while($j < count($temp) && $current_entry_id == $temp[$j]['entry_id']){
 
-for($x = 0; x <= count($to_return_3); $x += count($to_return_3))/10){
+            $temp_block[] = $temp[$j];
+            $j++;
+        }
+        find_max_age($temp_block);
+        $i = $j;
+    }
 
-    // if($to_return_3[$x] < $x * count($to_return_3)/10) data[] = $to_return_3[$x];
+    //SORT ARRAY TO CREATE BUCKETS
+    sort($to_return_3);
+    $step = end($to_return_3) - $to_return_3[0];
+    $labels = array();
+    $labels[] = array($to_return_3[0], $step/10);
+    $data = array(0,0,0,0,0,0,0,0,0,0);
+    for($x = 1; $x < 10; $x++){
 
+    $labels[] =  array((($step/10)*$x) + 1 ,($step/10)* ($x+1));
+    }
+
+    for($j = 0; $j < count($to_return_3); $j++){
+        
+        for($k = 0; $k < count($labels); $k++){
+
+            if( $labels[$k][0] <= $to_return_3[$j] && $to_return_3[$j] <= $labels[$k][1] ){
+                $data[$k] += 1;
+                break;
+            }
+        }
+        
+    }
+
+    for($h = 0; $h < count($labels); $h++){
+        $str_label = strval($labels[$h][0]) . '-' . strval($labels[$h][1]);
+        $labels[$h] = $str_label;
+    }
+}elseif($data[2] == 'b'){
+
+}else{
+    $labels = array("public", "private", "no-cache", "no-store");
+    $data = array(0,0,0,0);
+    try{
+        // SQL query for isps and Content types
+        $query_3_2 = "SELECT value FROM `headers` INNER JOIN entries on entry_id = id 
+        WHERE entries.isp IN ('$isps_3') AND name='cache-control' 
+        AND headers.entry_id IN(SELECT entry_id FROM headers WHERE name='content-type' and value IN ('$content_type_3')) 
+        AND (value LIKE '%private%' OR value LIKE '%public%' OR value LIKE '%no-cache%' OR value LIKE '%no-store%')";
+        $result = $con->query($query_3_2);
+        if(!$result) throw new Exception();
+        
+
+        if($result->num_rows > 0){
+            
+            while($row = $result->fetch_assoc()) {
+
+                //$exploded_arr = explode( ",", $row['value']);
+
+                
+                for($j = 0; $j < count($labels); $j++){
+                    if(strpos($row['value'], $labels[$j]) !== false){
+                        $data[$j] += 1;
+                    }
+                }
+                
+                // $temp[] = $exploded_arr;
+                        
+               
+            }
+        }
+        //----------------------------------------------------------------------
+    }
+    catch(Exception $e) {
+        echo "Query failed";
+    }
     
 }
 
 
-echo json_encode($to_return_3);
+echo json_encode(array($labels, $data));
 mysqli_close($con);
 
 ?>

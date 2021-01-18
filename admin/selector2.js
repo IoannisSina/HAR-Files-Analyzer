@@ -64,7 +64,6 @@ function line_data(response) {
     let options = {
 
         scales: {
-            gridLines: { color: 'red' },
             xAxes: [{
 
                 scaleLabel: {
@@ -72,6 +71,7 @@ function line_data(response) {
                     labelString: 'Hour of Day',
 
                 }
+              
             }],
             yAxes: [{
 
@@ -80,6 +80,7 @@ function line_data(response) {
                     labelString: 'Timings',
 
                 }
+              
             }]
         },
         title: {

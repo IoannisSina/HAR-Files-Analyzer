@@ -99,6 +99,13 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
 <!--------------------------------------------------------------------------------------------------------------------------------------------------->
 <hr style="height:1px;border-width:0;background-color:red">
 <div id="box-1">
+<div class="inner_2" id="contenttype_3_div">
+    <select title='Graph Selector 3' name="graph_selector_3" id="graph_selector_3" class="selectpicker selectors_3">
+      <option value="a" selected>Time to Live</option>
+      <option value="b">min-fresh / max-stale</option>
+      <option value="c">Cacheability Directives</option>
+    </select>
+  </div>
   <div class="inner_2" id="contenttype_3_div">
     <select title='Content Type' multiple="multiple" name="selector_contenttype_3" id="selector_contenttype_3" class="selectpicker selectors_3"  data-live-search="true">
     </select>
@@ -120,6 +127,8 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
 
   <canvas id="graph_3" height = 100></canvas>
 </div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------------->
+<hr style="height:1px;border-width:0;background-color:red">
 
 </body>
 </html>

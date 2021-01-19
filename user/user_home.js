@@ -57,7 +57,24 @@ function clean_har(obj) {
     //keep only non-sensitive
     //for all entries do
     obj = obj.map(function(element) {
+        //FIX ENTRIES WHICH DO NOT HAVE CORRECT CONTENT TYPE
+        let temp_url = element['request']['url'];
+        let len = element['request']['url'].length - 1;
+        let last = temp_url.slice(len - 5, len);
 
+        if (temp_url.includes(".html?") || temp_url.includes(".htm?") || temp_url.includes(".jsp?") || temp_url.includes(".php?") || last.includes(".html") || last.includes(".htm") || last.includes(".jsp") || last.includes(".php")) {
+            let temp_headers = element['response']['headers'];
+            let has_content_type = false;
+            for (j = 0; j < temp_headers.length; j++) {
+                if (temp_headers[j]['name'].toLowerCase() == "content-type") has_content_type = true;
+            }
+            if (!has_content_type) {
+                temp_headers.push({ "name": "content-type", "value": "text/html" });
+                element['response']['headers'] = temp_headers;
+            }
+        }
+
+        //---------------------------------------------------------------------
         element['timings'] = { "wait": element['timings']['wait'] };
         element['request'] = { "method": element['request']['method'], "url": keep_domain(element['request']['url']), "headers": element['request']['headers'] };
         element['response'] = { "status": element['response']['status'], "statusText": element['response']['statusText'], "headers": element['response']['headers'] };
@@ -235,6 +252,7 @@ submit_btn.onclick = function() {
             reader.onload = function(evt) {
                 //JSON to clean HAR file
                 let obj = JSON.parse(evt.target.result);
+
                 try {
                     let cleaned_obj = clean_har(obj['log']['entries']);
                     let stringed_json = JSON.stringify(cleaned_obj, null, 3);

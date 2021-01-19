@@ -35,17 +35,18 @@ send_request();
 function create_heatmap(data) {
 
     if (data != "") {
-        document.getElementById('no_entries').innerHTML = ""
+        document.getElementById('no_entries').innerHTML = "";
         data = JSON.parse(data);
+        console.log(data);
         let testData = {
             max: data[0][0]['count'],
             data: data[0]
         };
 
-        let marker = L.marker([data[0][0]['lat'], data[0][0]['lng']]);
+        let marker = L.marker([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']]);
         marker.bindPopup(data[1][0]['city']);
         marker.addTo(mymap);
-        mymap.setView([38.246242, 21.7350847], 8);
+        mymap.setView([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']], 8);
         heatmapLayer.setData(testData);
     } else {
         mymap.setView([38.246242, 21.7350847], 8);
@@ -72,8 +73,12 @@ function send_request() {
     xml_to_send.send(JSON.stringify(session_email));
 };
 
+
+// Passive event listeners are an emerging web standard, new feature shipped in Chrome 51 that provide a major potential boost to scroll performance.
+// It enables developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.
+// This optimization is partially defeated by the need to wait for the results of any touchstart and touchmove handlers, which may prevent the scroll entirely by calling preventDefault() on the event.
 document.addEventListener('wheel', (evt) => {
-    console.log("kappa");
+
 }, {
     capture: true,
     passive: true

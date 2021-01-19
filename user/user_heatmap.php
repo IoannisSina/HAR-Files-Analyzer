@@ -10,13 +10,15 @@ $data_heatmap = array();
 $data_info = array();
 $str_email = '"'.$email.'"';
 try{
-    $coords_query = "SELECT COUNT(*) as count, latitude, longitude, city, isp, upload_latitude, upload_longitude FROM entries where user_email = ".$str_email." and longitude is NOT NULL GROUP BY latitude, longitude, city ORDER BY COUNT(*) DESC";
+    $coords_query = "SELECT COUNT(*) as count, latitude, longitude, city, isp, upload_latitude, upload_longitude FROM entries
+    inner join headers on id = headers.entry_id 
+    where user_email = ".$str_email." and longitude is NOT NULL AND headers.name='content-type' AND headers.value LIKE '%text/html%' GROUP BY latitude, longitude, city ORDER BY COUNT(*) DESC";
     $result = $con->query($coords_query);
     // // if(!$rv) throw new Exception();
     // //var_dump($final_query_entries);
     
     if($result->num_rows > 0){
-        
+        $count = 0;
         while($row = $result->fetch_assoc()) {
             
             $array_heatmap= array(
@@ -24,16 +26,20 @@ try{
             "lng" => $row['longitude'],
             "count" => $row['count']
             );
+            if($count == $result->num_rows-1){
+                $array_info = array(
+                "city" => $row['city'],
+                "isp" => $row['isp'],
+                "upload_latitude"  => $row['upload_latitude'],
+                "upload_longtitude" => $row['upload_longitude'],
+                );
+                $data_info[] = $array_info;
+            }
 
-            $array_info = array(
-            "city" => $row['city'],
-            "isp" => $row['isp'],
-            "upload_latitude"  => $row['upload_latitude'],
-            "upload_longtitude" => $row['upload_longitude'],
-            );
+            $count++;
 
             $data_heatmap[] = $array_heatmap;
-            $data_info[] = $array_info;
+            
 
         }
     }

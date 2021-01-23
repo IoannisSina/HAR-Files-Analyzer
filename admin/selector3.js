@@ -106,11 +106,31 @@ function line_data_3(response) {
             borderWidth: 1,
 
         };
+        let options = {
+            title: {
+                display: true,
+                text: 'Percentage of Cacheability Directives',
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        let sum = data['datasets'][0]['data'].reduce(function(a, b) {
+                            return a + b;
+                        }, 0);
+                        console.log(sum);
+                        return ((data['datasets'][0]['data'][tooltipItem['index']] / sum) * 100).toFixed(2) + '%';
+                    }
+                }
+            }
+
+        };
+        
         myBarChart_3.destroy();
         myBarChart_3 = new Chart(ctx_3, {
-            type: 'doughnut'
+            type: 'pie'
         });
         myBarChart_3.data = data;
+        myBarChart_3.options = options;
         myBarChart_3.update();
 
     }

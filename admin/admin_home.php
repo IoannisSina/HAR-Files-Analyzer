@@ -19,6 +19,7 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
   
   <link rel="stylesheet" href="admin_home.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -27,9 +28,13 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/heatmapjs@2.0.2/heatmap.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-heatmap@1.0.0/leaflet-heatmap.js"></script>
   <script src="selector1.js" defer></script>
   <script src="selector3.js" defer></script>
   <script src="selector2.js" defer></script>
+  <script src="selector4.js" defer></script>
   
   <script type="text/javascript">
         var session_username = '<?php echo $session_name;?>';
@@ -129,6 +134,6 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
 </div>
 <!--------------------------------------------------------------------------------------------------------------------------------------------------->
 <hr style="height:1px;border-width:0;background-color:red">
-
+<div id="mapid4"></div>
 </body>
 </html>

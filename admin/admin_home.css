@@ -94,3 +94,15 @@ body {
 #graph_3 {
     margin-top: 10%;
 }
+
+#mapid4 {
+    text-align: center;
+    color: white;
+    /* background-color: white; */
+    margin-left: 3%;
+    height: 100%;
+    align-items: center;
+    width: 94%;
+    /* position: absolute; */
+    border: 2px solid red;
+}

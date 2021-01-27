@@ -26,8 +26,8 @@ try{
             "lng" => $row['longitude'],
             "count" => $row['count'],
             "url" => $row['request_url']
-
             );
+            
             if($count == $result->num_rows-1){
                 $array_info = array(
                 "city" => $row['city'],

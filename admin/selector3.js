@@ -29,7 +29,8 @@ sub_btn_3.onclick = function() {
             try {
                 line_data_3(JSON.parse(this.responseText));
             } catch (error) {
-                console.error(error);
+                alert("No entries to show");
+
             }
 
 
@@ -124,7 +125,7 @@ function line_data_3(response) {
             }
 
         };
-        
+
         myBarChart_3.destroy();
         myBarChart_3 = new Chart(ctx_3, {
             type: 'pie'

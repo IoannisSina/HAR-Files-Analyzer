@@ -42,14 +42,32 @@ function create_heatmap(data) {
             max: data[0][0]['count'],
             data: data[0]
         };
+        let seen_servers_ips = [];
+        let temp_lat = 0;
+        let temp_lon = 0;
+        //add server markers
+        for (let k = 0; k < data[0].length; k++) {
 
+            temp_lat = data[0][k]['lat'];
+            temp_lng = data[0][k]['lng'];
+
+            coords = temp_lat + "," + temp_lng;
+            if (!seen_servers_ips.includes(coords)) {
+                seen_servers_ips.push(coords);
+                let marker = L.marker([temp_lat, temp_lng]);
+                marker.bindPopup("<b>Domain name:</b> " + data[0][k]['url']);
+                marker.addTo(mymap);
+            }
+        }
+        //add user's marker
         let marker = L.marker([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']]);
         marker.bindPopup(data[1][0]['city']);
         marker.addTo(mymap);
+
         mymap.setView([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']], 8);
         heatmapLayer.setData(testData);
     } else {
-        mymap.setView([38.246242, 21.7350847], 8);
+        mymap.setView([0, 0], 3);
         document.getElementById('no_entries').innerHTML = "No entries to show!";
     }
 

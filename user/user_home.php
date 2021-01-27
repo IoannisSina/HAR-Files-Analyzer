@@ -66,7 +66,7 @@ if(isset($_SESSION['message'])){
                 <form id="change_form" name="reset_password" action="user_reset_credentials.php">
                     <input class="forms" type="submit" value="Change Password/Username">
                 </form>
-                <form name="log_out" action="log_out.php">
+                <form name="log_out" action="../log_out.php">
                     <input class="forms" type="submit" value="Logout">
                 </form>
             </div>

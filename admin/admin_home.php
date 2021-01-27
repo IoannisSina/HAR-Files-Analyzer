@@ -42,8 +42,11 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
   </script>
 </head>
 <body>
-
+<form id="form" name="log_out" action="../log_out.php">
+  <input id="log_out" type="submit" value="Logout">
+</form>
 <h1 id="welcome_message" class="blinking"></h1>
+
 <hr style="height:1px;border-width:0;background-color:red">
 <div id="box-1">
     <select name="choices_1" id="selector-1" class="selectpicker">
@@ -135,5 +138,7 @@ $session_email = (isset($_SESSION['email']))?$_SESSION['email']:'';
 <!--------------------------------------------------------------------------------------------------------------------------------------------------->
 <hr style="height:1px;border-width:0;background-color:red">
 <div id="mapid4"></div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------------->
+
 </body>
 </html>

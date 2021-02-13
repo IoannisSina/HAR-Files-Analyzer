@@ -13,8 +13,8 @@ body {
     width: 94%;
     background-color: black;
     position: absolute;
-    height: 25%;
-    border: 2px solid white;
+    height: 35%;
+    border: 2px solid red;
     margin-left: 2.5%;
 }
 
@@ -40,11 +40,10 @@ body {
     width: 31%;
     background-color: black;
     position: absolute;
-    height: 40%;
+    height: 50%;
     top: 25%;
-    border: 0.5px solid red;
+    border: 0.5px solid white;
     padding: 1.5%;
-    padding-bottom: 2%;
 }
 
 #second_inner_div {
@@ -76,7 +75,7 @@ body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 3%;
 }
 
 label {
@@ -88,8 +87,7 @@ label {
 }
 
 #har_selector {
-    border-radius: 5px;
-    width: 15%;
+    border-radius: 2px;
     color: white;
 }
 
@@ -109,8 +107,8 @@ label {
     color: white;
     /* background-color: white; */
     margin-left: 2.5%;
-    height: 69%;
-    top: 30%;
+    height: 60%;
+    top: 39%;
     align-items: center;
     width: 94%;
     position: absolute;
@@ -123,9 +121,9 @@ label {
     background-color: black;
     align-items: center;
     margin-left: 2.5%;
-    width: 95%;
+    width: 94%;
     position: absolute;
-    top: 27.5%;
+    top: 37%;
     height: 1%;
     color: white;
 }

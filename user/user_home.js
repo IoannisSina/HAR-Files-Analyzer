@@ -24,15 +24,13 @@ function check_extension(f_name) {
 file_selector.addEventListener('change', (event) => {
     selected_file = event.target.files;
 
-    try {
-        if (check_extension(selected_file[0]['name'])) {
-            document.getElementById('selected_file_name').innerHTML = selected_file[0]['name'];
-        } else
-            alert("Please select a HAR file!");
-    } catch {
+
+    if (check_extension(selected_file[0]['name'])) {
+        // document.getElementById('selected_file_name').innerHTML = selected_file[0]['name'];
+    } else {
         file_selector.files = null;
         selected_file = null;
-        document.getElementById('selected_file_name').innerHTML = "";
+        alert("Please select a HAR file!");
     }
 
 });
@@ -242,8 +240,10 @@ function update_labels(resp) {
 
 submit_btn.onclick = function() {
     //read HAR file as txt
+
     if (selected_file) {
         let file_name = selected_file[0]['name'];
+
         if (check_extension(file_name)) {
             let reader = new FileReader();
             reader.readAsText(selected_file[0], "UTF-8");

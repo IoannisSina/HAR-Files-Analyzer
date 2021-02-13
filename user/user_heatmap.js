@@ -1,3 +1,9 @@
+var redIcon = new L.icon({
+    iconUrl: 'marker-icon-2x-red.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+});
 let mymap = L.map("mapid");
 // if (document.getElementById("mapid").innerHTML == "No entries to show" || refresh || true) {
 let osmUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -37,7 +43,7 @@ function create_heatmap(data) {
     if (data != "") {
         document.getElementById('no_entries').innerHTML = "";
         data = JSON.parse(data);
-        console.log(data);
+        
         let testData = {
             max: data[0][0]['count'],
             data: data[0]
@@ -60,10 +66,10 @@ function create_heatmap(data) {
             }
         }
         //add user's marker
-        let marker = L.marker([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']]);
+        let marker = L.marker([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']], {icon: redIcon});
         marker.bindPopup(data[1][0]['city']);
         marker.addTo(mymap);
-
+        
         mymap.setView([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']], 8);
         heatmapLayer.setData(testData);
     } else {

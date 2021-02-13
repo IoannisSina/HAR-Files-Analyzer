@@ -45,7 +45,7 @@ if(isset($_SESSION['message'])){
             <div class ="inner_div">
                 <h2 id="upload_message">UPLOAD HAR FILE</h2>
                 <input id="har_selector" type="file" name="fileToUpload" accept=".har">
-                <p id="selected_file_name"></p><br>
+                <!-- <p id="selected_file_name"></p><br> --><br>
                 
                 <div id="save">
                     <label id="save_label">Save:</label>
@@ -72,7 +72,8 @@ if(isset($_SESSION['message'])){
             </div>
         </div>
         <div id="no_entries"></div>
-        <div id="mapid"></div>
+        <div id="mapid"></div><br>
+        
     </div>
     
 </body>

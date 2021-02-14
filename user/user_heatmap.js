@@ -43,7 +43,7 @@ function create_heatmap(data) {
     if (data != "") {
         document.getElementById('no_entries').innerHTML = "";
         data = JSON.parse(data);
-        
+
         let testData = {
             max: data[0][0]['count'],
             data: data[0]
@@ -66,10 +66,10 @@ function create_heatmap(data) {
             }
         }
         //add user's marker
-        let marker = L.marker([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']], {icon: redIcon});
+        let marker = L.marker([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']], { icon: redIcon });
         marker.bindPopup(data[1][0]['city']);
         marker.addTo(mymap);
-        
+
         mymap.setView([data[1][0]['upload_latitude'], data[1][0]['upload_longtitude']], 8);
         heatmapLayer.setData(testData);
     } else {

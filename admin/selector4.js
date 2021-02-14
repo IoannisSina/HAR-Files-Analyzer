@@ -1,6 +1,6 @@
 var redIcon = new L.icon({
     iconUrl: 'marker-icon-2x-red.png',
-    iconSize: [25, 41],
+    iconSize: [37, 56],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
 });
@@ -75,16 +75,24 @@ function create_heatmap(data) {
                     let k = 0
                     for (k = 0; k < splitted.length; k++) {
                         if (splitted[k].includes(data[i]['SIP'])) {
+
                             split_split = splitted[k].split(':');
                             break;
                         }
                     }
-                    let split_num = parseInt(split_split[2], 10) + data[i]['count'];
-                    split_split = "<br>" + "<b>IP</b>: " + data[i]['SIP'] + ", <b>Requests</b>: " + split_num;
+
+                    let split_num = parseInt(split_split[split_split.length - 1], 10) + data[i]['count'];
+                    split_split = "";
 
                     for (let j = 0; j < splitted.length; j++) {
                         if (j != k) split_split += splitted[j];
                     }
+
+                    if (!split_split.includes("Lat")) {
+                        split_split = "<b>Lat</b>: " + temp_server[0] + ", " + "<b>Lon</b>: " + temp_server[1] + "<br>" + split_split;
+                    }
+                    split_split += "<br>" + "<b>IP</b>: " + data[i]['SIP'] + ", <b>Requests</b>: " + split_num + "<br>";
+
                     //set new popUP
                     locations_markers[JSON.stringify(temp_server)].bindPopup(split_split);
                 }

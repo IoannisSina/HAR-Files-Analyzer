@@ -4,7 +4,7 @@ Ioannis Prokopiou\
 Ioannis Sina 
 
 
-**Description**\
+**Description**
 
 Users are able to upload HAR files and see information about them :chart:\
 Admins can see statistics for all har file that have been uploaded to the Database
@@ -28,7 +28,3 @@ Admins can see statistics for all har file that have been uploaded to the Databa
 | user5 | 99999999KK!! | user |
 | admin1 | ADMIN!23 | admin |
 | admin2 | 000000!L | admin |
-
-
-**GUI Screenshots**
-

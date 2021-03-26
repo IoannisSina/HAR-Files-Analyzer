@@ -12,9 +12,9 @@ Admins can see statistics for all har file that have been uploaded to the Databa
 
 **Steps to run :runner:**
 
-1. Set-up a server and upload the Databse file project_web.sql\
-2. Upload all the other files to the server\
-3. Open index.php from login-register folder\
+1. Set-up a server and upload the Databse file project_web.sql  
+2. Upload all the other files to the server  
+3. Open index.php from login-register folder  
 
 
 **Accounts**

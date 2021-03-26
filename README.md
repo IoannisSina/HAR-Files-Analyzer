@@ -6,6 +6,7 @@ Ioannis Sina
 
 **Description**
 
+University project which is used to upload and analyze HAR file\
 Users are able to upload HAR files and see information about them :chart:\
 Admins can see statistics for all har file that have been uploaded to the Database
 

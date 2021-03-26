@@ -1,14 +1,26 @@
-**Team** 
+**Team**\
 
-Ioannis Prokopiou 
+Ioannis Prokopiou\
 Ioannis Sina 
 
 
-**Description** 
+**Description**\
 
-Users are able to upload HAR files and see information about them :chart: 
-Admins can see statistics for all har file that have been uploaded to the Database 
+Users are able to upload HAR files and see information about them :chart:\
+Admins can see statistics for all har file that have been uploaded to the Database\
 
-**Steps to run :runner:** 
 
-1. Set
+**Steps to run :runner:**\
+
+1. Set-up a server and upload the Databse file project_web.sql\
+2. Upload all the other files to the server\
+3. Open index.php from login-register folder\
+
+
+**Accounts**\
+
+| Username  | Password  | Property  |
+| -------------  | -------------  | -------------  |
+| user1 | 12345678A! | user |
+| user2 | 12345678B! | user |
+| user3 | ok | ok | 

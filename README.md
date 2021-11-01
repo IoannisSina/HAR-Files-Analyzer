@@ -1,15 +1,13 @@
 ## Description ⚡
 
-HAR analyzer is a University project for the course web programming and systems which is used to upload and analyze HAR files :chart_with_upwards_trend:\
-Users are able to upload HAR files and see information about them :chart:\
-Admins can see statistics for all har file that have been uploaded to the Database
+HAR analyzer was created for the course web programming and systems [CEID](https://www.ceid.upatras.gr/en/), University of Patras and is used to upload and analyze HAR files. Users can upload HAR files and see information about them. Admins can see statistics for all har file that have been uploaded to the Database
 
 
 ## Steps to run 🏃
 
-1. Set-up a server and upload the Databse file project_web.sql  
-2. Upload all the other files to the server  
-3. Open index.php from login-register folder  
+- Set-up a server and upload the Databse file project_web.sql  
+- Upload all the other files to the server  
+- Open index.php from login-register folder  
 
 
 ## Accounts 🔒

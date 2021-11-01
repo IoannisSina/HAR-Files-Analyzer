@@ -1,24 +1,18 @@
-**Team**
+## Description ⚡
 
-Ioannis Prokopiou\
-Ioannis Sina 
-
-
-**Description**
-
-University project which is used to upload and analyze HAR files :chart_with_upwards_trend:\
+HAR analyzer is a University project for the course web programming and systems which is used to upload and analyze HAR files :chart_with_upwards_trend:\
 Users are able to upload HAR files and see information about them :chart:\
 Admins can see statistics for all har file that have been uploaded to the Database
 
 
-**Steps to run :runner:**
+## Steps to run 🏃
 
 1. Set-up a server and upload the Databse file project_web.sql  
 2. Upload all the other files to the server  
 3. Open index.php from login-register folder  
 
 
-**Accounts**
+## Accounts 🔒
 
 | Username  | Password | Property |
 | ------------- | ------------- | ------------- |
@@ -29,3 +23,8 @@ Admins can see statistics for all har file that have been uploaded to the Databa
 | user5 | 99999999KK!! | user |
 | admin1 | ADMIN!23 | admin |
 | admin2 | 000000!L | admin |
+
+## Team 👪
+
+[Ioannis Prokopiou](https://github.com/GiannisProkopiou)\
+[Ioannis Sina](https://github.com/IoannisSina)
